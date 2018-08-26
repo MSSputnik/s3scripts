@@ -9,10 +9,12 @@ See subfolder for details.
 
 ### get.sh
 `get.sh <source> <destination>`
-*source*
+
+**source**
 - source must be a file within your repository. Wildcards or paths are not allowed.
 - source is always relative to the root directory of your repository.
-*destination*
+
+**destination**
 - destination is optional.
 - if omitted the current directory is used
 - destination must be a directory. 
@@ -20,16 +22,19 @@ See subfolder for details.
 
 ### list.sh
 `list.sh <directory>`
-*directory*
+
+**directory**
 - directory is optional
 - if omitted the root directory of your repository is shown.
 - the output format and if subdiretories are shown depends on the implementation.
 
 ### upload.sh
 `upload.sh <source> <destination>`
-*source*
+
+**source**
 - source must be a file on your local file system. Wildcards or paths are not allowed.
-*destination*
+
+**destination**
 - destination is optional. 
 - if omitted, the root directory of your repository is used.
 - destination must be a directory. Append / to make sure.
@@ -37,7 +42,8 @@ See subfolder for details.
 
 ### delete.sh
 `delete.sh <file>`
-*file*
+
+**file**
 - file is mandatory
 - specify the absolute path within your repository.
 - Wildcards or paths without filename are not allowed.
@@ -53,19 +59,27 @@ There is not installation required. Just copy the scripts into the desired direc
 
 ### Installation via script
 To simplify the installation, a simple installation scrip exist.
+
 Just run `curl https://raw.githubusercontent.com/MSSputnik/s3scripts/master/install.sh | bash`
+
 This will install all 4 curl scripts into your local diretory.
 
 The installation scripts supports up to 3 arguments.
-run `https://raw.githubusercontent.com/MSSputnik/s3scripts/master/install.sh | bash -s <type> <mode> <path>`
-*type*
-Specify which implementation you like to download. Default is `curl`.
-*mode*
+
+Run `https://raw.githubusercontent.com/MSSputnik/s3scripts/master/install.sh | bash -s <type> <mode> <path>`
+
+**type**
+- Specify which implementation you like to download. Default is `curl`.
+
+**mode**
+
 Specify which scripts you need. 
 - rw: Read / Write - get all 4 scripts.
 - ro: Read Only - get get.sh and list.sh
 - wo: Write Only - get upload.sh and delete.sh
-*path*
+
+**path**
+
 Specifiy the path where you want to place the scripts. Default is your current directory.
 If the path does not exists, it will be created.
 
