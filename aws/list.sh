@@ -1,15 +1,19 @@
 #!/bin/bash
-scriptVersion=201602081115
+scriptVersion=201808261115
 sourcefile=$1
 
 SCRIPT_DIR=$(dirname $(readlink -f $0))
-if [ ! -e "${SCRIPT_DIR}/settings.sh" ]
-then
-  echo No settings file found. Plesae crate a settings file ${SCRIPT_DIR}/settings.sh
-  echo The settings file must contain the parameter s3Bucket, s3Key, s3Secret
+if [ -e "${SCRIPT_DIR}/settings.sh" ]; then
+  . ${SCRIPT_DIR}/settings.sh
+fi
+
+if [ -z "$s3Bucket" ]; then
+  echo No bucket name defined.
+  echo Set env variable s3Bucket or create a settings file ${SCRIPT_DIR}/settings.sh
+  echo The settings file must contain the parameter s3Bucket
+  echo Optional are s3Key, s3Secret, curlProperties
   exit 10
 fi
-. ${SCRIPT_DIR}/settings.sh
 
 resource="/${s3Bucket}/${sourcefile}"
 

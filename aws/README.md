@@ -5,11 +5,11 @@ Simple scripts to interact with a S3 bucket.
 This scripts use the common aws-cli which must already exist
 
 ## settings.sh
-In this version, the scripts always require that the file `settings.sh` to be present in the same directory as the scripts.
-Mandatory parameters:
-+ s3Bucket
+In this version, the scripts no not require the file `settings.sh` to be present in the same directory as the scripts.
+When using role based authentication, only the s3Bucket is required. This can also be set as environment variable: `export s3Bucket=<bucketname>`
 
 Optional parameters:
++ s3Bucket
 + s3Key
 + s3Secret 
 

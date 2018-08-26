@@ -1,8 +1,7 @@
-#Mandatory
+#Optional 
 #Bucket name
 s3Bucket=
 
-#Optional 
 #AWS Key
 #s3Key=
 
