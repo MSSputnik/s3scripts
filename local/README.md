@@ -1,4 +1,4 @@
-# s3scripts using curl and openssh 
+# s3scripts using local file system commands 
 Simple scripts to interact with a S3 bucket.
 
 ## Reqirements
