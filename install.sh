@@ -1,5 +1,5 @@
 #!/bin/bash
-#Version=201808260845
+#Version=201808261020
 
 clientRepo="https://raw.githubusercontent.com/MSSputnik/s3scripts/master"
 clientRFiles="get.sh list.sh"
@@ -64,10 +64,16 @@ for f in $clientFiles; do
   echo "curl $clientSource $clientDest"
   curl -f -o "$clientDest" $clientSource 
   erg+=$?
+  if [ -e $clientDest ]; then
+    chmod 755 $clientDest
+  fi
 done
 if [ $erg -gt 0 ]; then
   echo
   echo "ERROR: Not all files downloaded."
+else
+  echo
+  echo "All scripts downloaded successfully."
 fi
 exit $erg
 

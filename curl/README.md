@@ -17,5 +17,5 @@ Optional parameters:
 ## Remarks
 If the aws credentials are not specified, the commands do not work.
 
-The commands currently support ony signature version 2. So they work not in every AWS region. See (https://docs.aws.amazon.com/general/latest/gr/signature-version-2.html).
+The commands currently support ony signature version 2. So they work not in every AWS region. See https://docs.aws.amazon.com/general/latest/gr/signature-version-2.html .
 

@@ -55,7 +55,7 @@ See subfolders for details.
 ## Installation
 
 ### Installation by hand
-There is not installation required. Just copy the scripts into the desired directory and make them executable `chmod u+x *.sh`. Create the `settings.sh` configuration file if required by the implementation.
+There is not installation required. Just copy the scripts into the desired directory and make them executable `chmod 755 *.sh`. Create the `settings.sh` configuration file if required by the implementation.
 
 ### Installation via script
 To simplify the installation, a simple installation scrip exist.
@@ -66,7 +66,7 @@ This will install all 4 curl scripts into your local diretory.
 
 The installation scripts supports up to 3 arguments.
 
-Run `https://raw.githubusercontent.com/MSSputnik/s3scripts/master/install.sh | bash -s <type> <mode> <path>`
+Run `curl https://raw.githubusercontent.com/MSSputnik/s3scripts/master/install.sh | bash -s <type> <mode> <path>`
 
 **type**
 - Specify which implementation you like to download. Default is `curl`.
