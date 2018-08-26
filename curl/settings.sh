@@ -1,14 +1,13 @@
-#Mandatory
+#Optional
 #Bucket name
-s3Bucket=
+#s3Bucket=
 
 #AWS Key
-s3Key=
+#s3Key=
 
 #AWS Secret
-s3Secret=
+#s3Secret=
 
-#Optional
 #curl command line options
 #eg. specifiy proxy
 #curlProperties=
