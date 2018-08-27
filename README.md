@@ -1,5 +1,5 @@
 # s3scripts
-Simple scripts to interact with a S3 bucket
+Simple scripts to interact with a bucket (AWS or Google Cloud)
 
 ## Objective
 The purpose of this scripts is to have unique commands to interact with your software repository independed of the repository implementation.
