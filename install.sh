@@ -1,5 +1,5 @@
 #!/bin/sh
-#Version=201810031220
+#Version=201810031320
 
 clientRepo="https://raw.githubusercontent.com/MSSputnik/s3scripts/master"
 clientRFiles="get.sh list.sh"
@@ -9,6 +9,7 @@ echo "Installscript for s3scripts"
 clientType=$1
 clientMode=$2
 clientPath=$3
+httpClient=$4
 
 if [ -z "$clientType" ]; then
   clientType=curl
@@ -19,11 +20,18 @@ fi
 if [ -z "$clientPath" ]; then
   clientPath=.
 fi
+if [ -z "$httpClient" ]; then
+  httpClient=curl
+fi
 
 echo Using:
 echo clientType: $clientType
 echo clientMode: $clientMode
 echo clientPath: $clientPath
+if [ $httpClient != "curl" -a $httpClient != "wget" ]; then
+  echo "ERROR: httpClient invalid http client specified. [curl|wget]"
+  exit 1
+fi
 
 if [ -e "$clientPath" ]; then
   if [ ! -d "$clientPath" ]; then
@@ -61,9 +69,15 @@ erg=0
 for f in $clientFiles; do
   clientSource=$clientRepo/$clientType/$f
   clientDest=$clientPath$f
-  echo "curl $clientSource $clientDest"
-  curl -f -o "$clientDest" $clientSource
-  erg=$(( $erg+$? ))
+  if [ $httpClient = "wget" ]; then
+    echo "wget $clientSource $clientDest"
+    wget -O "$clientDest" $clientSource
+    erg=$(( $erg+$? ))
+  else
+    echo "curl $clientSource $clientDest"
+    curl -f -o "$clientDest" $clientSource
+    erg=$(( $erg+$? ))
+  fi
   if [ -e $clientDest ]; then
     chmod 755 $clientDest
   fi
