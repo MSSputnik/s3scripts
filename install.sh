@@ -1,5 +1,5 @@
-#!/bin/bash
-#Version=201808261020
+#!/bin/sh
+#Version=201810031220
 
 clientRepo="https://raw.githubusercontent.com/MSSputnik/s3scripts/master"
 clientRFiles="get.sh list.sh"
@@ -40,14 +40,14 @@ else
   fi
 fi
 
-if [ "${clientPath: -1}" != "/" ]; then
+if echo "${clientPath}" | grep -Eq '\/$'; then
   clientPath=$clientPath/
 fi
 
-if [ $clientMode == "ro" ]; then
+if [ $clientMode = "ro" ]; then
   clientFiles="$clientRFiles"
 fi
-if [ $clientMode == "wo" ]; then
+if [ $clientMode = "wo" ]; then
   clientFiles="$clientWFiles"
 fi
 if [ -z "$clientFiles" ]; then
@@ -62,8 +62,8 @@ for f in $clientFiles; do
   clientSource=$clientRepo/$clientType/$f
   clientDest=$clientPath$f
   echo "curl $clientSource $clientDest"
-  curl -f -o "$clientDest" $clientSource 
-  erg+=$?
+  curl -f -o "$clientDest" $clientSource
+  erg=$(( $erg+$? ))
   if [ -e $clientDest ]; then
     chmod 755 $clientDest
   fi
@@ -76,4 +76,3 @@ else
   echo "All scripts downloaded successfully."
 fi
 exit $erg
-
