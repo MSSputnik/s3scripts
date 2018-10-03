@@ -40,7 +40,7 @@ else
   fi
 fi
 
-if echo "${clientPath}" | grep -Eq '\/$'; then
+if ! echo "${clientPath}" | grep '/$'; then
   clientPath=$clientPath/
 fi
 
