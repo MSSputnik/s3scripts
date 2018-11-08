@@ -62,7 +62,7 @@ echo SourceFile: $sourcefile
 echo Filename:   $destfile
 echo Resource:   $resource
 
-echo Execute: gsutil -q cp s3:/${resource} $destfile 
+echo Execute: gsutil -q cp gs:/${resource} $destfile 
 gsutil -q cp gs:/${resource} $destfile 
 if [ $? -eq 0 ]
 then 

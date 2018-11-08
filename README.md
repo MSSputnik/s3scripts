@@ -1,5 +1,5 @@
 # s3scripts
-Simple scripts to interact with a bucket (AWS or Google Cloud)
+Simple scripts to interact with a bucket (AWS, Azure or Google Cloud)
 
 ## Objective
 The purpose of this scripts is to have unique commands to interact with your software repository independed of the repository implementation.
@@ -70,6 +70,7 @@ Run `curl https://raw.githubusercontent.com/MSSputnik/s3scripts/master/install.s
 
 **type**
 - Specify which implementation you like to download. Default is `curl`.
+- As type use the name of the subdirectory (e.g aws)
 
 **mode**
 
