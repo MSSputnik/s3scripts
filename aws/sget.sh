@@ -18,11 +18,15 @@ if [ -e "${SCRIPT_DIR}/settings.sh" ]; then
   . ${SCRIPT_DIR}/settings.sh
 fi
 
-if [ -z "$s3Bucket" ]; then
+if [ -z "$s3SettingsBucket" ]; then
+  s3SettingsBucket=$s3Bucket
+fi
+
+if [ -z "$s3SettingsBucket" ]; then
   echo No bucket name defined.
-  echo Set env variable s3Bucket or create a settings file ${SCRIPT_DIR}/settings.sh
-  echo The settings file must contain the parameter s3Bucket
-  echo Optional are s3Key, s3Secret, s3AWSCMD
+  echo Set env variable s3SettingsBucket, s3Bucket or create a settings file ${SCRIPT_DIR}/settings.sh
+  echo The settings file must contain the parameter s3SettingsBucket or s3Bucket
+  echo Optional are s3Key, s3Secret, s3SettingsPath, s3AWSCMD
   exit 10
 fi
 
@@ -58,7 +62,18 @@ if [ "$directory" -a "${directory: -1}" != "/" ]; then
   directory=$directory/
 fi
 
-resource="/${s3Bucket}/${sourcefile}"
+# calculate source settings directory
+if [ -z "$s3SettingPath" ]; then
+  settingPath="settings/$($s3AWSCMD sts get-caller-identity --query UserId --output text)"
+else
+  settingPath=$s3SettingPath
+fi
+
+if [ "$settingPath" -a "${settingPath: -1}" != "/" ]; then
+  settingPath=$settingPath/
+fi
+
+resource="/${s3SettingsBucket}/${settingPath}${sourcefile}"
 destfile="${directory}${filename}"
 
 if [ "$s3Key" ]; then
@@ -74,10 +89,8 @@ echo Resource:   $resource
 
 echo Execute: $s3AWSCMD s3 cp s3:/${resource} $destfile --quiet
 $s3AWSCMD s3 cp s3:/${resource} $destfile --quiet
-if [ $? -eq 0 ]
-then 
-  
-echo Download Success 
+if [ $? -eq 0 ]; then 
+  echo Download Success 
 else
   echo ERROR downloading file
   exit 2

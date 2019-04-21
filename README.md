@@ -2,12 +2,13 @@
 Simple scripts to interact with a bucket (AWS, Azure or Google Cloud)
 
 ## Objective
-The purpose of this scripts is to have unique commands to interact with your software repository independed of the repository implementation.
+The purpose of this scripts is to have unique commands to interact with your software repository independed of the repository implementation.  
+The new 's' scripts were introduced to support the separation of settings and installation files. This new type of scripts interact with the settings store which can be configured in the settings.sh. The default settings store depends on the implementation. See there for more details.
 
 ## Usage
 See subfolder for details.
 
-### get.sh
+### (s)get.sh
 `get.sh <source> <destination>`
 
 **source**
@@ -20,7 +21,7 @@ See subfolder for details.
 - destination must be a directory. 
 - rename of files during download is not supported.
 
-### list.sh
+### (s)list.sh
 `list.sh <directory>`
 
 **directory**
@@ -28,7 +29,7 @@ See subfolder for details.
 - if omitted the root directory of your repository is shown.
 - the output format and if subdiretories are shown depends on the implementation.
 
-### upload.sh
+### (s)upload.sh
 `upload.sh <source> <destination>`
 
 **source**
@@ -40,7 +41,7 @@ See subfolder for details.
 - destination must be a directory. Append / to make sure.
 - rename of files during upload is not suppored.
 
-### delete.sh
+### (s)delete.sh
 `delete.sh <file>`
 
 **file**
@@ -50,7 +51,7 @@ See subfolder for details.
 - There will be no security question.
 
 ## Configuration
-See subfolders for details.
+See sub folders for details.
 
 ## Installation
 
@@ -70,14 +71,20 @@ Run `curl https://raw.githubusercontent.com/MSSputnik/s3scripts/master/install.s
 
 **type**
 - Specify which implementation you like to download. Default is `curl`.
-- As type use the name of the subdirectory (e.g aws)
+- As type use the name of the sub directory (e.g aws)
 
 **mode**
 
 Specify which scripts you need. 
-- rw: Read / Write - get all 4 scripts.
-- ro: Read Only - get get.sh and list.sh
-- wo: Write Only - get upload.sh and delete.sh
+- rw:  Read / Write - get all 4 standard scripts. (Default)
+- ro:  Read Only - get get.sh and list.sh
+- wo:  Write Only - get upload.sh and delete.sh
+- sr:  Settings Read Only - get sget.sh and slist.sh
+- sw:  Settings Write Only - get supload.sh and sdelete.sh
+- sro: Settings and Standard Read Only - get get.sh, list.sh sget.sh and slist.sh
+- swo: Settings and Standard Write Only - get upload.sh, delete.sh, supload.sh and sdelete.sh
+- srw: Settings and Standard Read / Write - get all 8 scripts.
+- so:  Settings Read / Write - get all 4 settings scripts.
 
 **path**
 

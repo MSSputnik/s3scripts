@@ -20,11 +20,15 @@ if [ -e "${SCRIPT_DIR}/settings.sh" ]; then
   . ${SCRIPT_DIR}/settings.sh
 fi
 
-if [ -z "$s3Bucket" ]; then
+if [ -z "$s3SettingsBucket" ]; then
+  s3SettingsBucket=$s3Bucket
+fi
+
+if [ -z "$s3SettingsBucket" ]; then
   echo No bucket name defined.
-  echo Set env variable s3Bucket or create a settings file ${SCRIPT_DIR}/settings.sh
-  echo The settings file must contain the parameter s3Bucket
-  echo Optional are s3Key, s3Secret, s3AWSCMD
+  echo Set env variable s3SettingsBucket, s3Bucket or create a settings file ${SCRIPT_DIR}/settings.sh
+  echo The settings file must contain the parameter s3SettingsBucket or s3Bucket
+  echo Optional are s3Key, s3Secret, s3SettingsPath, s3AWSCMD
   exit 10
 fi
 
@@ -36,6 +40,19 @@ else
     directory=${directory}/
   fi
 fi
+
+# calculate source settings directory
+if [ -z "$s3SettingPath" ]; then
+  settingPath="settings/$($s3AWSCMD sts get-caller-identity --query UserId --output text)"
+else
+  settingPath=$s3SettingPath
+fi
+
+if [ "$settingPath" -a "${settingPath: -1}" != "/" ]; then
+  settingPath=$settingPath/
+fi
+
+resource="/${s3Bucket}/${settingPath}${directory}${filename}"
 
 if [ "$permission" == "public" ]; then
   permheader="--acl public"
@@ -50,8 +67,6 @@ if [ "$s3Secret" ]; then
   export AWS_SECRET_ACCESS_KEY=$s3Secret
 fi
 
-
-resource="/${s3Bucket}/${directory}${filename}"
 echo SourceFile: $sourcefile
 echo Filename:   $filename
 echo Resource:   $resource

@@ -1,6 +1,8 @@
 # s3scripts using curl and openssh 
 Simple scripts to interact with a S3 bucket.
 
+Unfortunately the settings scripts are not yet created for curl.
+
 ## Reqirements
 This scripts use `curl` and `openssl` which must already exist
 

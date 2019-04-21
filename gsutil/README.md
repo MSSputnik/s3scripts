@@ -1,6 +1,8 @@
 # s3scripts using gsutil 
 Simple scripts to interact with a google cloud storage.
 
+Unfortunately the settings scripts are not yet created for gsutil.
+
 ## Reqirements
 This scripts use the common gsutil which must already exist
 

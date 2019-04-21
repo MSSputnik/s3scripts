@@ -1,10 +1,16 @@
 #!/bin/bash
-scriptVersion=201808261115
+scriptVersion=201904210940
+
 sourcefile=$1
 if [ -z "$sourcefile" ]
 then
   echo No file specified. Nothing to delete.
   exit 3
+fi
+
+#user can overwrite the aws command
+if [ -z "$s3AWSCMD" ]; then
+  s3AWSCMD=aws
 fi
 
 SCRIPT_DIR=$(dirname $(readlink -f $0))
@@ -16,7 +22,7 @@ if [ -z "$s3Bucket" ]; then
   echo No bucket name defined.
   echo Set env variable s3Bucket or create a settings file ${SCRIPT_DIR}/settings.sh
   echo The settings file must contain the parameter s3Bucket
-  echo Optional are s3Key, s3Secret, curlProperties
+  echo Optional are s3Key, s3Secret, s3AWSCMD
   exit 10
 fi
 
@@ -32,9 +38,8 @@ fi
 echo SourceFile: $sourcefile
 echo Delete:     $resource
 
-aws s3 rm "s3:/${resource}"
-if [ $? -eq 0 ]
-then
+$s3AWSCMD s3 rm "s3:/${resource}"
+if [ $? -eq 0 ]; then
   echo Delete success
 else
   echo ERROR deleting file

@@ -1,5 +1,7 @@
 # s3scripts using local file system commands 
-Simple scripts to interact with a S3 bucket.
+Simple scripts to interact with a local directory.
+
+Unfortunately the settings scripts are not yet created for the Azure Cli.
 
 ## Reqirements
 This scripts use local file system commands like `ls` and `cp`.

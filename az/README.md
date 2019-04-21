@@ -1,5 +1,7 @@
 # s3scripts using Azure cli
-Simple scripts to interact with a az file share, not blob store.
+Simple scripts to interact with a az file share, not blob store.  
+
+Unfortunately the settings scripts are not yet created for the Azure Cli.
 
 ## Reqirements
 This scripts use the common az cli which must already exist
